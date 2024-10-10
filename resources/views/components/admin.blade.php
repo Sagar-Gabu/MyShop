@@ -76,13 +76,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.category.index')}}">
                     <i class="bi bi-list-check"></i>
                     <span>Category</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.subcategory.index')}}">
                     <i class="bi bi-tags"></i>
                     <span>SubCategory</span>
                 </a>
