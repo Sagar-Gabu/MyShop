@@ -80,7 +80,7 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id = decrypt($id); // Decrypt the ID
+        $id = decrypt($id);
         $subCategory = SubCategory::findOrFail($id);
 
         $request->validate([
@@ -101,7 +101,7 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
 {
-    $id = decrypt($id); // Decrypt the ID
+    $id = decrypt($id);
     $subcategory = SubCategory::findOrFail($id);
     $subcategory->delete();
 

@@ -86,9 +86,11 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
-    {
-        //
-    }
+{
+    $subcategories = SubCategory::all(); // Fetch all subcategories
+    return view('admin.product.edit', compact('product', 'subcategories'));
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -102,9 +104,46 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product)
-    {
-        //
+{
+    // Validate the request
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'description' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'sub_category_id' => 'required|exists:sub_categories,id',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ]);
+
+    // Check if a new image is uploaded
+    if ($request->hasFile('image')) {
+        // Delete the old image if it exists
+        if ($product->image && file_exists(public_path('images/' . $product->image))) {
+            unlink(public_path('images/' . $product->image));
+        }
+
+        // Store the new image
+        $destinationPath = 'images'; 
+        $myimage = $request->image->getClientOriginalName(); 
+        $request->image->move(public_path($destinationPath), $myimage); 
+
+        $product->image = $myimage;
     }
+
+
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->description = $request->description;
+    $product->category_id = $request->category_id;
+    $product->sub_category_id = $request->sub_category_id;
+
+
+    $product->save();
+
+    
+    return redirect()->route('admin.product.index')->with('success', 'Product updated successfully!');
+}
+
 
     /**
      * Remove the specified resource from storage.

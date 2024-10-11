@@ -48,7 +48,7 @@
 							<li>
 								<a href="{{route('site.shop')}}">Shop</a>
 							</li>
-
+ 
 							<li class="label1" data-label1="hot">
 								<a href="{{route('site.cart')}}">Features</a>
 							</li>

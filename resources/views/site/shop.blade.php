@@ -2,38 +2,66 @@
 	@section('title','shop')
 
 
+	@extends('layouts.app')
+
+@section('content')
+<div class="container my-5">
+    <h1 class="text-center mb-5">Shop Categories</h1>
+    
+    <div class="row">
+        @foreach($categories as $category)
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>{{ $category->name }}</h2>
+                </div>
+
+                <div class="card-body">
+                    <div class="accordion" id="subcategoryAccordion{{ $category->id }}">
+                        @foreach($category->subcategories as $subcategory)
+                        <div class="accordion-item mb-2">
+                            <h3 class="accordion-header" id="heading{{ $subcategory->id }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $subcategory->id }}" aria-expanded="false" aria-controls="collapse{{ $subcategory->id }}">
+                                    {{ $subcategory->name }}
+                                </button>
+                            </h3>
+                            <div id="collapse{{ $subcategory->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $subcategory->id }}" data-bs-parent="#subcategoryAccordion{{ $category->id }}">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        @forelse($subcategory->products as $product)
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card h-100">
+                                                <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->name }}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $product->name }}</h5>
+                                                    <p class="card-text">{{ $product->description }}</p>
+                                                    <p class="card-text text-muted">${{ $product->price }}</p>
+                                                </div>
+                                                <div class="card-footer text-center">
+                                                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">View Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
+                                        <p>No products available in this subcategory.</p>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endsection
+
 
 	<!-- Product -->
-	<div class="bg0 m-t-70 p-b-140">
-		<div class="container">
-
-			<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					@foreach ($categories as $category)
-					<li>
-						<a href="{{route('product.category',$category->slug)}}"><i class="fas fa-apple-alt me-2"></i>{{ $category->name }}</a>
-					</li>
-					@endforeach
-					</ul>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
+	 
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
