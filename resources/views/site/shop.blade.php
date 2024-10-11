@@ -1,67 +1,33 @@
 <x-site>
-	@section('title','shop')
+@section('title','shop')	
 
 
-	@extends('layouts.app')
-
-@section('content')
-<div class="container my-5">
-    <h1 class="text-center mb-5">Shop Categories</h1>
-    
-    <div class="row">
-        @foreach($categories as $category)
-        <div class="col-md-12 mb-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h2>{{ $category->name }}</h2>
-                </div>
-
-                <div class="card-body">
-                    <div class="accordion" id="subcategoryAccordion{{ $category->id }}">
-                        @foreach($category->subcategories as $subcategory)
-                        <div class="accordion-item mb-2">
-                            <h3 class="accordion-header" id="heading{{ $subcategory->id }}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $subcategory->id }}" aria-expanded="false" aria-controls="collapse{{ $subcategory->id }}">
-                                    {{ $subcategory->name }}
-                                </button>
-                            </h3>
-                            <div id="collapse{{ $subcategory->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $subcategory->id }}" data-bs-parent="#subcategoryAccordion{{ $category->id }}">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        @forelse($subcategory->products as $product)
-                                        <div class="col-md-4 mb-3">
-                                            <div class="card h-100">
-                                                <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->name }}">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ $product->name }}</h5>
-                                                    <p class="card-text">{{ $product->description }}</p>
-                                                    <p class="card-text text-muted">${{ $product->price }}</p>
-                                                </div>
-                                                <div class="card-footer text-center">
-                                                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">View Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @empty
-                                        <p>No products available in this subcategory.</p>
-                                        @endforelse
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
-@endsection
-
-
+	
 	<!-- Product -->
-	 
+	<div class="bg0 m-t-70 p-b-140">
+	<div class="container">
+
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						All Products
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+						Women
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+						Men
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+						Bag
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+						Shoes
+					</button>
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
@@ -72,7 +38,7 @@
 					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
 						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Filter
+						 Filter
 					</div>
 
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
@@ -81,7 +47,7 @@
 						Search
 					</div>
 				</div>
-
+				
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
@@ -90,7 +56,7 @@
 						</button>
 
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>
+					</div>	
 				</div>
 
 				<!-- Filter -->
@@ -384,7 +350,7 @@
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="{{asset('site/images/product-04.jpg')}}" alt="IMG-PRODUCT">
+							<img src="{{asset('site/images/product-04.jpg')}}"	 alt="IMG-PRODUCT">
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -458,7 +424,7 @@
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Vintage Inspired Classic
+									Vintage Inspired Classic 
 								</a>
 
 								<span class="stext-105 cl3">
@@ -618,7 +584,7 @@
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Herschel supply
+									Herschel supply 
 								</a>
 
 								<span class="stext-105 cl3">
@@ -805,6 +771,6 @@
 			</div>
 		</div>
 	</div>
-
-
+	
+		
 </x-site>

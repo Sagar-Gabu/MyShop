@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Setting;
 
 
@@ -12,7 +15,12 @@ class SiteController extends Controller
     {
         $setting = Setting::first();
         view()->share('setting',$setting);
+        $categories = Category::all();
+        view()->share('categories',$categories);
+        $products = Product::all();
+        view()->share('products',$products);
     }
+    
 
     public function index()
     {
