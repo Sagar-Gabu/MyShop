@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Slug</th>
                 <th>Category</th>
                 <th>Action</th>
             </tr>
@@ -14,7 +15,9 @@
             @forelse ($data as $subcat)
             <tr>
                 <td>{{ $subcat->name }}</td>
+                <td>{{ $subcat->slug}}</td>
                 <td>{{ $subcat->category->name }}</td>
+            
                 <td>
                     <a href="{{ route('admin.subcategory.edit', encrypt($subcat->id)) }}" class="btn btn-sm btn-primary">Edit</a>
 

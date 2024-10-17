@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
@@ -60,6 +62,7 @@ class ProductController extends Controller
         
         $product = new Product();
         $product->name = $request->name;
+        $product->slug= Str::slug($request->name);
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id; 
@@ -77,17 +80,21 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+    
+        $product = Product::findOrFail($id);
+        
+        
+        return view('product.detail', compact('product'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
 {
-    $subcategories = SubCategory::all(); // Fetch all subcategories
+    $subcategories = SubCategory::all();
     return view('admin.product.edit', compact('product', 'subcategories'));
 }
 
@@ -133,6 +140,7 @@ class ProductController extends Controller
 
     $product->name = $request->name;
     $product->price = $request->price;
+    $product->slug= Str::slug($request->name);
     $product->description = $request->description;
     $product->category_id = $request->category_id;
     $product->sub_category_id = $request->sub_category_id;
@@ -162,5 +170,7 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(['success' => true]);
     }
+
+    
 
 }

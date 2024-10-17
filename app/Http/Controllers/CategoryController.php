@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -40,6 +41,7 @@ class CategoryController extends Controller
             ]);
             $category = new Category();
             $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
             $category->save();
             return redirect()->route('admin.category.index');
         }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
+ 
 class SubCategoryController extends Controller
 {
 
@@ -47,6 +49,7 @@ class SubCategoryController extends Controller
     
         $subCategory = new SubCategory();
         $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
         $subCategory->category_id = $request->category;
         $subCategory->save();
     

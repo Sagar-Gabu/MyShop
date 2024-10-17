@@ -6,6 +6,7 @@
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
+                <th scope="col">slug</th>
                 <th scope="col" colspan="2">Action</th>
             </tr>
         </thead>
@@ -14,6 +15,7 @@
             <tr id="category-row-{{ $category->id }}">
                 <th scope="row">{{ $category->id }}</th>
                 <td>{{ $category->name }}</td>
+                <td>{{$category->slug}}</td>
                 <td>
                     <a href="{{ route('admin.category.edit', $category) }}" class="btn btn-success">Edit</a>
                     <button class="btn btn-danger deletebtn" type="button" data-id="{{ $category->id }}" data-url="{{ route('admin.category.destroy', $category->id) }}">Delete</button>

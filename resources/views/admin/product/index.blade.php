@@ -9,6 +9,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Description</th>
+                <th scope="col">Slug</th>
                 <th scope="col">Cat</th>
                 <th scope="col">Subcat</th>
                 <th scope="col">Action</th>
@@ -22,6 +23,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->description }}</td>
+                <td>{{ $product->slug}}</td>
                 <td>{{ optional($product->category)->name }}</td>
                 <td>{{ optional($product->subcategory)->name }}</td>
                 <td>
