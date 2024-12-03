@@ -34,6 +34,8 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('site/css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('site/css/main.css')}}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 	<!--===============================================================================================-->
 	<x-site_header />
 	<div class="content-wrapper">

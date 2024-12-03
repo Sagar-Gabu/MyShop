@@ -30,7 +30,7 @@
             </tr>
             @empty
             <tr>
-                <th class="bg-danger text-center text-white" colspan="3">No Subcategories.</th>
+                <th class="bg-danger text-center text-white" colspan="4">No Subcategories.</th>
             </tr>
             @endforelse
         </tbody>

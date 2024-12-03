@@ -1,22 +1,23 @@
-<?php
+    <?php
 
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\SiteController;
+    use App\Http\Controllers\MailController;
+    use App\Http\Controllers\SiteController;
+    use App\Http\Controllers\CartController;
+    use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Route;
+    Route::get('/', [SiteController::class, 'index'])->name('site.index');
+    Route::get('about', [SiteController::class, 'about'])->name('site.about');
+    Route::get('contact', [SiteController::class, 'contact'])->name('site.contact');
+    Route::get('shop', [SiteController::class, 'shop'])->name('site.shop');
+    Route::get('blog', [SiteController::class, 'blog'])->name('site.blog');
+    Route::get('blogdetail', [SiteController::class, 'blogdetail'])->name('site.blogdetail');
+    Route::get('{category}/{slug}', [SiteController::class, 'productDetail'])->name('site.productdetail');
+    Route::get('shop/category/{slug}', [SiteController::class, 'showProductsByCategory'])->name('product.category');
 
-// Route::name('site.')->controller(SiteController::class)->group(function(){
-//     Route::get('/','index')->name('index');
-// });
+    // cart route
+Route::get('/cart', [SiteController::class, 'showcart'])->name('site.cart')->middleware(['auth', 'verified']);
+Route::post('/addcart/{id?}', [SiteController::class, 'addcart'])->name('cart.add')->middleware(['auth', 'verified']);
+Route::put('/cartUpdate/{id?}', [SiteController::class, 'update'])->name('cart.update')->middleware(['auth', 'verified']);
+Route::delete('/cartremove/{id}', [SiteController::class, 'destroy'])->name('cart.remove')->middleware(['auth', 'verified']);
 
-Route::get('/', [SiteController::class, 'index'])->name('site.index');
-Route::get('about', [SiteController::class, 'about'])->name('site.about');
-Route::get('contact', [SiteController::class, 'contact'])->name('site.contact');
-Route::get('shop', [SiteController::class, 'shop'])->name('site.shop');
-Route::get('cart', [SiteController::class, 'cart'])->name('site.cart');
-Route::get('blog', [SiteController::class, 'blog'])->name('site.blog');
-Route::get('blogdetail', [SiteController::class, 'blogdetail'])->name('site.blogdetail');
-Route::get('{category}/{slug}', [SiteController::class, 'productDetail'])->name('site.productdetail');
-Route::get('/products/category/{slugj}', [SiteController::class, 'showProductsByCategory'])->name('product.category');
-
-Route::post('Contactmail', [MailController::class, 'Contactmail'])->name('site.contactmail');
+    Route::post('Contactmail', [MailController::class, 'Contactmail'])->name('site.contactmail');

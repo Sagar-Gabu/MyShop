@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($categories as $category)
+            @forelse ($categories  as $category)
             <tr id="category-row-{{ $category->id }}">
                 <th scope="row">{{ $category->id }}</th>
                 <td>{{ $category->name }}</td>
@@ -23,7 +23,7 @@
             </tr>
             @empty
             <tr>
-                <th class="bg-danger text-center text-white" colspan="3">No categories.</th>
+                <th class="bg-danger text-center text-white" colspan="4">No categories.</th>
             </tr>
             @endforelse
         </tbody>

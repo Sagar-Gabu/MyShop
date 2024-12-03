@@ -15,8 +15,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
@@ -31,8 +30,6 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 </head>
-
-
 
 <body>
 
@@ -61,6 +58,17 @@
                         <i class="bi bi-search"></i>
                     </a>
                 </li><!-- End Search Icon-->
+                
+                @auth
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-link text-decoration-none">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </nav><!-- End Icons Navigation -->
 
@@ -76,36 +84,45 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.category.index')}}">
+                <a class="nav-link " href="{{ route('admin.category.index') }}">
                     <i class="bi bi-list-check"></i>
                     <span>Category</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.subcategory.index')}}">
+                <a class="nav-link " href="{{ route('admin.subcategory.index') }}">
                     <i class="bi bi-tags"></i>
                     <span>SubCategory</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.product.index')}}">
+                <a class="nav-link " href="{{ route('admin.product.index') }}">
                     <i class="bi bi-box"></i>
                     <span>Product</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admin.setting.index')}}">
+                <a class="nav-link " href="{{ route('admin.setting.index') }}">
                     <i class="bi bi-gear"></i>
-                    <span> Site Setting</span>
+                    <span>Site Setting</span>
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <i class="bi bi-card-list"></i>
+                    <span>orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('profile.edit')}}">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
         </ul>
-    </aside><!-- End Sidebar-->
-
+    </aside><!-- End Sidebar -->
 
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Dashboard</h1>
         </div>
@@ -113,8 +130,6 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-  
-
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
@@ -128,13 +143,9 @@
     <script src="{{ asset('admin/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/php-email-form/validate.js') }}"></script>
 
-
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous">
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous">
     </script>
-
 
     @yield('ajax')
 
@@ -142,4 +153,6 @@
     <script src="{{ asset('admin/js/main.js') }}"></script>
 
 </body>
+
 </html>
+ 

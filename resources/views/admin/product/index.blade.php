@@ -33,7 +33,7 @@
             </tr>
             @empty
             <tr>
-                <th class="bg-danger text-center text-white" colspan="8">No products.</th>
+                <th class="bg-danger text-center text-white" colspan="9">No products.</th>
             </tr>
             @endforelse
         </tbody>

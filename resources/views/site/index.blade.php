@@ -142,7 +142,7 @@
 					<div class="block1 wrap-pic-w">
 						<img src="{{asset('site/images/banner-03.jpg')}}" alt="IMG-BANNER">
 
-						<a href="product.html" class ="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 									Accessories
@@ -172,16 +172,18 @@
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
 					Product Overview
-				</h3>			</div>
+				</h3>
+			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1">
+					<a href="{{ route('site.shop') }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ request()->get('category') ? '' : 'how-active1' }}">
 						All Products
-						@foreach ($categories as $category)
-					<button>
-					<a href="{{route('product.category',$category->slug)}}"class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"></i>{{ $category->name }}</a>
-					</button>
+					</a>
+					@foreach ($categories as $category)
+					<a href="{{ route('site.shop', ['category' => $category->slug]) }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ request()->get('category') === $category->slug ? 'how-active1' : '' }}">
+						{{ $category->name }}
+					</a>
 					@endforeach
 				</div>
 
@@ -416,8 +418,9 @@
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									{{$product->name}}
+							<a href="{{ route('site.productdetail',['category' => $product->category->slug, 'slug' => $product->slug])}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							{{$product->name}}
+									
 								</a>
 
 								<span class="stext-105 cl3">
