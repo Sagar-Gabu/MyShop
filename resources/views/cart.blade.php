@@ -54,7 +54,7 @@
                             <p><strong>Total: </strong>&#8377;{{ number_format($cartItems->sum(function($item) { return $item->product->price * $item->quantity; }), 2) }}</p>
                         </div>
                         <div class="checkout">
-                            <a href="" class="btn btn-primary">Proceed to Checkout</a>
+                            <a href="{{('checkout')}}" class="btn btn-primary">Proceed to Checkout</a>
                         </div>
                     </div>
                     @endif

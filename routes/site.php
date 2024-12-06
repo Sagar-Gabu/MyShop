@@ -20,4 +20,12 @@ Route::post('/addcart/{id?}', [SiteController::class, 'addcart'])->name('cart.ad
 Route::put('/cartUpdate/{id?}', [SiteController::class, 'update'])->name('cart.update')->middleware(['auth', 'verified']);
 Route::delete('/cartremove/{id}', [SiteController::class, 'destroy'])->name('cart.remove')->middleware(['auth', 'verified']);
 
-    Route::post('Contactmail', [MailController::class, 'Contactmail'])->name('site.contactmail');
+//order route  
+Route::get('/checkout', [SiteController::class, 'checkout'])->name('checkout')->middleware(['auth', 'verified']);
+
+
+Route::post('/checkout', [SiteController::class, 'processCheckout'])->name('checkout.process')->middleware(['auth', 'verified']);
+Route::post('/checkout/process', [SiteController::class, 'processCheckout'])->name('site.processCheckout')->middleware(['auth', 'verified']);
+
+
+Route::post('Contactmail', [MailController::class, 'Contactmail'])->name('site.contactmail');

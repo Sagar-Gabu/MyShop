@@ -108,7 +108,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.orders.index')}}">
                     <i class="bi bi-card-list"></i>
                     <span>orders</span>
                 </a>

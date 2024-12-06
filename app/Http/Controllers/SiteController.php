@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
@@ -164,8 +165,78 @@ public function update(Request $request, $id)
 
     return redirect()->route('site.cart')->with('error', 'Cart item not found.');
 }
+public function order()
+{
+    $user = Auth::user(); // Get the logged-in user
+    $cartItems = Cart::where('user_id', $user->id)->get(); // Get all cart items for the user
 
+    // Pass the cart items to the view
+    return view('cart', compact('cartItems'));
+}
 
+public function checkout()
+{
+    // Get the authenticated user
+    $user = Auth::user();
+    
+    // Get the user ID
+    $user_Id = $user->id;
+    $cartItems= cart::where('user_id',$user_Id)->with('product')->get();
+    return view('site.checkout',compact('cartItems'));
+
+}
+public function processCheckout(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'mobile_number' => 'required|digits:10',
+        'payment_method' => 'required|in:credit_card,paypal,cash_on_delivery',
+    ]);
+
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Please log in to proceed with checkout.');
+    }
+
+    // Get cart items for the logged-in user
+    $cartItems = Cart::where('user_id', $user->id)->get();
+
+    if ($cartItems->isEmpty()) {
+        return redirect()->route('site.cart')->with('error', 'Your cart is empty.');
+    }
+
+    // Calculate the total amount
+    $totalAmount = $cartItems->sum(function ($item) {
+        return $item->product->price * $item->quantity;
+    });
+
+    // Save the order
+    $order = new Order();
+    $order->user_id = $user->id;
+    $order->name = $request->name;
+    $order->address = $request->address;
+    $order->mobile_number = $request->mobile_number;
+    $order->payment_method = $request->payment_method;
+    $order->total = $totalAmount;
+    $order->save();
+
+    // Save order items
+    foreach ($cartItems as $item) {
+        $order->orderItems()->create([
+            'product_id' => $item->product_id,
+            'quantity' => $item->quantity,
+            'price' => $item->product->price,
+            'total' => $item->product->price * $item->quantity, // Correct field name
+        ]);
+    }
+
+    // Clear the cart
+    Cart::where('user_id', $user->id)->delete();
+
+    return redirect()->route('site.index')->with('success', 'Your order has been placed successfully!');
+}
 
 
 }
